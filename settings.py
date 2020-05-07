@@ -14,12 +14,9 @@ class Settings:
         self.bullet_color = 60, 60, 60
         self.bullets_allowed = 3
         # Alien settings
-        self.fleet_drop_speed = 5
+        self.fleet_drop_speed = 50
         self.speedup_scale = 1.1
         self.score_scale = 1.5
-
-        self.alien_points = 50
-
         self.initialize_dynamic_settings()
 
     def initialize_dynamic_settings(self):
@@ -27,7 +24,7 @@ class Settings:
         self.bullet_speed_factor = 1
         self.ship_speed_factor = 1.5
         self.fleet_direction = 1
-        # self.alien_points = 50
+        self.alien_points = 50
 
     def increase_speed(self):
         """Increases speed settings and value of the aliens"""
