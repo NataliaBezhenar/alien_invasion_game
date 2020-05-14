@@ -32,6 +32,7 @@ def check_play_button(ai_settings, screen, stats, sb, play_button, ship, aliens,
         sb.prep_level()
         sb.prep_score()
         sb.prep_high_score()
+        sb.prep_ships()
         create_fleet(ai_settings, screen, ship, aliens)
 
 def check_keydown_events(event, stats, sb, ai_settings, screen, ship, bullets):
@@ -50,6 +51,7 @@ def check_keydown_events(event, stats, sb, ai_settings, screen, ship, bullets):
             sb.prep_level()
             sb.prep_score()
             sb.prep_high_score()
+            sb.prep_ships()
 
 
 def check_keyup_events(event, ship):
@@ -156,6 +158,7 @@ def update_aliens(ai_settings, stats, screen, ship, sb,  aliens, bullets):
 def ship_hit(ai_settings, stats, screen, ship, sb, aliens, bullets):
     if stats.ships_left > 0:
         stats.ships_left -= 1
+        sb.prep_ships()
         aliens.empty()
         bullets.empty()
         create_fleet(ai_settings, screen, ship, aliens)
@@ -171,6 +174,7 @@ def reset_game_settings(ai_settings, stats, screen, ship, sb, aliens):
     ai_settings.initialize_dynamic_settings
     ai_settings.initialize_dynamic_settings()
     aliens.empty()
+    sb.prep_ships()
     create_fleet(ai_settings, screen, ship, aliens)
 
 

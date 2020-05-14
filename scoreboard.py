@@ -1,4 +1,6 @@
 import pygame.font
+from pygame.sprite import Group
+from ship import Ship
 
 
 class Scoreboard:
@@ -17,6 +19,7 @@ class Scoreboard:
         self.prep_score()
         self.prep_high_score()
         self.prep_level()
+        self.prep_ships()
 
     def prep_score(self):
         """Converts the current points into a graphic image"""
@@ -68,4 +71,14 @@ class Scoreboard:
         self.screen.blit(self.score_annot_image, self.score_annot_image_rect)
         self.screen.blit(self.level_image, self.level_rect)
         self.screen.blit(self.prep_level_annot_image, self.prep_level_annot_image_rect)
+        self.ships.draw(self.screen)
 
+    def prep_ships(self):
+        self.ships = Group()
+        for ship_number in range(self.stats.ships_left):
+            ship = Ship(self.ai_settings, self.screen)
+            ship.image = pygame.transform.scale(ship.image, (25, 25))
+            ship_rect = ship.image.get_rect()
+            ship.rect.x = 10 + ship_number * ship_rect.width
+            ship.rect.y = 10
+            self.ships.add(ship)
