@@ -189,4 +189,10 @@ def check_high_score(stats, sb):
     """Checks if there is new high score"""
     if stats.score > stats.high_score:
         stats.high_score = stats.score
+        try:
+            file = open("hiscore.txt", "w")
+            file.write(str(stats.high_score))
+        except IOError:
+            print("Failed to open the file")
     sb.prep_high_score()
+
