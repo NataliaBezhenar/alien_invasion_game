@@ -58,7 +58,7 @@ class Scoreboard:
         self.level_rect.right = self.score_rect.right
         prep_level_annot = "Level"
         self.prep_level_annot_image= self.font1.render(prep_level_annot, True, self.text_color_annot,
-                                                        self.ai_settings.bg_color)
+                                                       self.ai_settings.bg_color)
         self.prep_level_annot_image_rect = self.prep_level_annot_image.get_rect()
         self.prep_level_annot_image_rect.right = self.score_rect.right
         self.prep_level_annot_image_rect.top = self.score_rect.bottom
@@ -71,14 +71,21 @@ class Scoreboard:
         self.screen.blit(self.score_annot_image, self.score_annot_image_rect)
         self.screen.blit(self.level_image, self.level_rect)
         self.screen.blit(self.prep_level_annot_image, self.prep_level_annot_image_rect)
+        self.screen.blit(self.prep_ships_annotation_image, self.prep_ships_annotation_image_rect)
         self.ships.draw(self.screen)
 
     def prep_ships(self):
         self.ships = Group()
+        ships_annotation = 'Ships left'
+        self.prep_ships_annotation_image = self.font1.render(ships_annotation, True, self.text_color_annot,
+                                                             self.ai_settings.bg_color)
+        self.prep_ships_annotation_image_rect = self.prep_ships_annotation_image.get_rect()
+        self.prep_ships_annotation_image_rect.x = 10
+        self.prep_ships_annotation_image_rect.y = self.top_indent
         for ship_number in range(self.stats.ships_left):
             ship = Ship(self.ai_settings, self.screen)
             ship.image = pygame.transform.scale(ship.image, (25, 25))
             ship_rect = ship.image.get_rect()
             ship.rect.x = 10 + ship_number * ship_rect.width
-            ship.rect.y = 10
+            ship.rect.y = self.prep_ships_annotation_image_rect.y + self.prep_ships_annotation_image_rect.height
             self.ships.add(ship)
